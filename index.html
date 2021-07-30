@@ -25,7 +25,8 @@
                         @mousedown.left="selectPic" @dragstart="movePic(event)" @mousemove="move(event)"
                         @mouseup.left="disselect"
                         @touchstart="selectPic"
-                        @touchend="disselect">
+                        @touchend="disselect"
+                        @touchmove="move(event)">
                 </div>
                 <label for="upload">Carica immagine</label>
                 <input type="file" name="" id="" value="upload" v-on:change="preloadPic($event)">
