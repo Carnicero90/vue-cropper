@@ -9,14 +9,16 @@ var app = new Vue({
         isPicSelected: false,
         previousSet: false,
         clickX: 0,
-        clickY: 0
+        clickY: 0,
+        pic: null,
+        frame: null
     },
     methods: {
         preloadPic(event) {
+            this.pic = document.querySelector('img');
             let f = event.target.files[0];
             this.preload = URL.createObjectURL(f);
             this.loadedPic = true;
-            const image = document.querySelector('img');
             this.x = 0;
             this.y = 0;
         },
@@ -37,8 +39,18 @@ var app = new Vue({
         },
         disselect(event) {
             this.isPicSelected = false;
+            this.readjust();
+        },
+        readjust() {
+            if (this.pic.offsetTop > 0) {
+                this.y = 0;
+            }
+            if (this.pic.offsetLeft > 0) {
+                this.x = 0;
+            }
         }
      },
     mounted() {
+        this.frame = document.querySelector('.frame');
     },
 })

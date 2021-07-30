@@ -22,11 +22,17 @@
                     <img v-if="!preload" src="img/default-user.png" alt="" style="width: 100%; height: auto;">
                     <img v-else :src="preload" alt=""
                         :style="`transform: scale(${size}); min-height: 100%; max-height: 200%; position:absolute; left: ${x}; top: ${y};`"
-                        @mousedown.left="selectPic" @dragstart="movePic(event)" @mousemove="move(event)"
+                        @mousedown.left="selectPic"
+                        >
+                        <div class="layover" style="position:absolute; left: 0; top: 0; background-color: rgba(255,255,255,0.4); width: 100%; height: 100%;"
+                        v-if="isPicSelected"
+                        @dragstart="movePic(event)" @mousemove="move(event)"
                         @mouseup.left="disselect"
                         @touchstart="selectPic"
                         @touchend="disselect"
                         @touchmove="move(event)">
+                            <p style="position: relative; top:50%; left: 20%; transform: translate(0,-50%); background-color: rgba(0,0,0,0.5); padding: .4em; width: max-content; color: white; border-radius: 5px">Trascina l'immagine per riposizionarla</p>
+                        </div>
                 </div>
                 <label for="upload">Carica immagine</label>
                 <input type="file" name="" id="" value="upload" v-on:change="preloadPic($event)">
