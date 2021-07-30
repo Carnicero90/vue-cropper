@@ -81,9 +81,23 @@ var app = new Vue({
                 this.x = 0;
             }
 
+        },
+        savePic() {
+            this.context = this.canvas.getContext('2d');
+            this.newImg = new Image();
+            this.newImg.src = this.preload;
+            this.newImg.onload = () => {
+                let x = this.pic.style.left.replace('px', '');
+                let y = this.pic.style.top.replace('px', '');
+                let w = this.pic.clientWidth;
+                let h = this.pic.clientHeight;
+                this.context.drawImage(this.newImg, x,y,w,h);
+            }
         }
     },
     mounted() {
         this.frame = document.querySelector('.frame');
+        this.canvas = document.querySelector('#croppedImage');
+
     },
 })
