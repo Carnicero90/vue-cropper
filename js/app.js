@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#root',
     data: {
         preload: '',
-        size: 100,
+        size: 1.0,
         loadedPic: false,
         x: 0,
         y: 0,
@@ -16,7 +16,6 @@ var app = new Vue({
             this.preload = URL.createObjectURL(f);
             this.loadedPic = true;
             const image = document.querySelector('img');
-
         },
         selectPic(event) {
             this.isPicSelected = true;
@@ -34,6 +33,9 @@ var app = new Vue({
                 this.x = event.clientX - this.clickX;
                 this.y = event.clientY - this.clickY;
             }
+        },
+        disselect(event) {
+            this.isPicSelected = false;
         }
      },
     mounted() {
