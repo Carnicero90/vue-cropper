@@ -23,7 +23,9 @@
                     <img v-else :src="preload" alt=""
                         :style="`transform: scale(${size}); min-height: 100%; max-height: 200%; position:absolute; left: ${x}; top: ${y};`"
                         @mousedown.left="selectPic" @dragstart="movePic(event)" @mousemove="move(event)"
-                        @mouseup.left="disselect">
+                        @mouseup.left="disselect"
+                        @touchstart="selectPic"
+                        @touchend="disselect">
                 </div>
                 <label for="upload">Carica immagine</label>
                 <input type="file" name="" id="" value="upload" v-on:change="preloadPic($event)">
