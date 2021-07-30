@@ -23,14 +23,11 @@ var app = new Vue({
             this.x = 0;
             this.y = 0;
             this.pic = document.querySelector('img');
-            console.log(this.pic)
 
-            this.pic_height = this.pic.clientHeight;
             this.$nextTick(() => {
                 this.pic_width = this.pic.clientWidth;
-
+                this.pic_height = this.pic.clientHeight;
                 this.loadedPic = true;
-                console.log(this.pic_width)
 
             })
 
@@ -60,17 +57,18 @@ var app = new Vue({
 
         },
         readjust() {
-            if (this.pic_height*this.size + this.pic.offsetTop < this.frame.clientHeight) {
-                console.log(this.frame.clientHeight - this.pic_height)
-                this.y = this.frame.clientHeight - this.pic_height*this.size;
-            }
-            else if (this.pic.offsetTop > 0) {
+            if (this.pic.offsetTop > 0) {
                 this.y = 0;
             }
-            if (this.pic_width*this.size + this.pic.offsetLeft < this.frame.clientWidth) {
-                this.x = this.frame.clientWidth - this.pic_width*this.size;
+            else if (this.pic.offsetTop < this.frame.clientHeight - this.pic.clientHeight) {
+
+                this.y = this.frame.clientHeight - this.pic.clientHeight;
             }
-            if (this.pic.offsetLeft > 0) {
+
+            if (this.pic.offsetLeft < this.frame.clientWidth - this.pic.clientWidth) {
+                this.x = this.frame.clientWidth - this.pic.clientWidth;
+            }
+            else if (this.pic.offsetLeft > 0) {
                 this.x = 0;
             }
 
@@ -82,7 +80,7 @@ var app = new Vue({
     computed: {
         getWidth() {
 
-            return 
+            return
         }
     }
 })
