@@ -11,6 +11,8 @@ var app = new Vue({
         pic: null,
         pic_width: 0,
         frame: null,
+        grayscale: 0,
+        sepia: 0
     },
     methods: {
         preloadPic(event) {
@@ -84,6 +86,7 @@ var app = new Vue({
         },
         savePic() {
             this.context = this.canvas.getContext('2d');
+
             this.newImg = new Image();
             this.newImg.src = this.preload;
             this.newImg.onload = () => {
@@ -91,6 +94,7 @@ var app = new Vue({
                 let y = this.pic.style.top.replace('px', '');
                 let w = this.pic.clientWidth;
                 let h = this.pic.clientHeight;
+                this.context.filter = `grayscale(${this.grayscale}) sepia(${this.sepia})`;
                 this.context.drawImage(this.newImg, x,y,w,h);
             }
         }

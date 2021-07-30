@@ -8,9 +8,15 @@ img {
     display: block;
     width: 100%;
 }
-
+li {
+    padding-top: 20px;
+}
 .abs {
     position: absolute;
+}
+
+.flexer {
+    display: flex;
 }
 .frame {
     position: relative;
