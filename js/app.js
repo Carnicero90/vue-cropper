@@ -3,35 +3,44 @@ var app = new Vue({
     data: {
         preload: '',
         size: 1.0,
-        loadedPic: false,
-        x: 50,
-        y: 50,
+        x: 0,
+        y: 0,
         isPicSelected: false,
-        previousSet: false,
         clickX: 0,
         clickY: 0,
         pic: null,
         pic_width: 0,
-        pic_height: 0,
         frame: null,
     },
     methods: {
         preloadPic(event) {
 
-            let f = event.target.files[0];
+            this.size = 1;
+
+            const f = event.target.files[0];
+
             this.preload = URL.createObjectURL(f);
-            this.x = 0;
-            this.y = 0;
-            this.pic = document.querySelector('img');
+            console.log(this.preload)
+            const im = new Image();
+            im.src = this.preload;
+            im.onload = () => {
+                const height = im.naturalHeight;
+                const width = im.naturalWidth;
+                if (width > height) {
+                    this.pic_width = 100 * (width / height);
+                }
+                else {
+                    this.pic_width = 100;
+                }
+            }
 
-            this.$nextTick(() => {
-                this.pic_width = this.pic.clientWidth;
-                this.pic_height = this.pic.clientHeight;
-                this.loadedPic = true;
-
+            setTimeout(() => {
+                this.pic = document.querySelector('#image');
+                this.x = 0;
+                this.y = 0;
             })
-
         },
+
         selectPic(event) {
             if (this.pic) {
                 this.isPicSelected = true;
@@ -77,10 +86,4 @@ var app = new Vue({
     mounted() {
         this.frame = document.querySelector('.frame');
     },
-    computed: {
-        getWidth() {
-
-            return
-        }
-    }
 })
