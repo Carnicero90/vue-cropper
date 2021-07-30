@@ -14,11 +14,16 @@
     <div id="root">
         <main>
             <div class="pic-container">
-                <div class="frame" style="height: 300px; width: 300px; position: relative; border: 1px solid black; overflow: hidden;">
-                    <img :src="preload ? preload : 'img/default-user.png'" alt="" :style="`transform: scale(${size}%)`" style="position:absolute;left:0;top:0; transform-origin: 0 0;">
+                <div class="frame"
+                    style="height: 300px; width: 300px; position: relative; border: 1px solid black; overflow: hidden;">
+                    <img :src="preload ? preload : 'img/default-user.png'" alt=""
+                        :style="`transform: scale(${size}%); transform-origin: ${x}px ${y}px;`"
+                        @mousedown.left="selectPic" @dragstart="movePic(event)" @mousemove="move(event)"
+                        @mouseup.left="isPicSelected = false">
                 </div>
                 <input type="file" name="" id="" v-on:change="preloadPic($event)">
-                <input type="range" name="" id="size" min="1" max="100" :value="size" v-model="size" v-on:change="alert(size)" style="transform: rotate(-90deg)">
+                <input type="range" name="" id="size" min="1" max="100" :value="size" v-model="size" v-if="preload"
+                    style="transform: rotate(-90deg)">
             </div>
 
         </main>
