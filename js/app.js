@@ -7,6 +7,7 @@ var app = new Vue({
         x: 0,
         y: 0,
         isPicSelected: false,
+        previousSet: false,
         clickX: 0,
         clickY: 0
     },
@@ -16,17 +17,17 @@ var app = new Vue({
             this.preload = URL.createObjectURL(f);
             this.loadedPic = true;
             const image = document.querySelector('img');
+            this.x = 0;
+            this.y = 0;
         },
         selectPic(event) {
             this.isPicSelected = true;
-            this.clickX = event.clientX;
-            this.clickY = event.clientY;
+
+            this.clickX = event.clientX - this.x;
+            this.clickY = event.clientY - this.y;
         },
         movePic(event) {
             event.preventDefault();
-            if (this.isPicSelected) {
-                console.log(event.clientX);
-            }
         },
         move(event) {
             if (this.isPicSelected) {

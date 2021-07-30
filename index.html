@@ -13,9 +13,9 @@
 <body @click="disselect">
     <div id="root">
         <main>
-            <div class="pic-container" style="margin: auto; width: 25vh; margin-top: 20vh;">
+            <div class="pic-container" style="margin: auto; width: 25vh; margin-top: 20vh;" @click="disselect">
                 <div class="frame"
-                    style="height: 300px; width: 300px; position: relative; border: 1px solid black; overflow: hidden;">
+                    style="height: 400px; width: 400px; position: relative; border: 1px solid black; overflow: hidden;">
                     <img :src="preload ? preload : 'img/default-user.png'" alt=""
                         :style="`transform: scale(${size}%); -webkit-transform: scale(${size}); -ms-transform: scale(${size}%); transform-origin: ${x}px ${y}px; -webkit-transform-origin: ${x}px ${y}px; -ms-transform-origin: ${x}px ${y}px`"
                         @mousedown.left="selectPic" @dragstart="movePic(event)" @mousemove="move(event)"
