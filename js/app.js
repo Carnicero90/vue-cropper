@@ -28,6 +28,7 @@ var app = new Vue({
             const im = new Image();
             im.src = this.preload;
             im.onload = () => {
+                // devo necessariamente fare sta roba perche usando direttamente this.pic per recuperare le dimensioni non ho risultati sempre attendibili
                 const height = im.naturalHeight;
                 const width = im.naturalWidth;
                 if (width > height) {
@@ -96,6 +97,9 @@ var app = new Vue({
                 let y = this.pic.style.top.replace('px', '');
                 let w = this.pic.clientWidth;
                 let h = this.pic.clientHeight;
+                // this.canvas.style.width = w*10+'px';
+                // this.canvas.style.height = h*10+'px';
+
                 this.context.filter = `grayscale(${this.grayscale}) sepia(${this.sepia})`;
                 this.context.drawImage(this.newImg, x,y,w,h);
             }

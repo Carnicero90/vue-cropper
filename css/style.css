@@ -1,7 +1,12 @@
+/* ==========
+    RESETS
+   ========== */
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 1em;
 }
 
 img {
@@ -9,43 +14,87 @@ img {
     width: 100%;
 }
 li {
-    padding-top: 20px;
+    list-style-type: none;
 }
-.hidden {
-    display: none;
+
+/* ==========
+    SPACING
+   ========== */
+.mb-1 {
+    margin-bottom: 0.5em;
 }
+.mb-2 {
+    margin-bottom: 1em;
+}
+.mb-3 {
+    margin-bottom: 1.5em;
+}
+.mb-4 {
+    margin-bottom: 2em;
+}
+.m-auto {
+    margin: auto;
+}
+
+/* ==========
+    TYPOGRAPHY
+   ========== */
+.h1 {
+    font-size: 2.4em;
+}
+.h2 {
+    font-size: 1.6em;
+}
+.small {
+    font-size: 0.8em;
+}
+
+/* ==========
+    POSITIONING
+   ========== */
 .abs {
     position: absolute;
 }
 .rel {
     position: relative;
 }
-.m-auto {
-    margin: auto;
+/* ==========
+    DISPLAY
+   ========== */
+.d-none {
+    display: none;
 }
+.d-flex {
+    display: flex;
+}
+/* ==========
+    FLEXERS
+   ========== */
+.d-flex.col {
+    flex-direction: column;
+}
+.d-flex.center {
+    justify-content: center;
+}
+.d-flex.center-cross {
+    align-items: center;
+}
+/* ==========
+    ANCORA SPARSE
+   ========== */
 
 body {
     background-color: #1d2226;
     color: white;
     font-family: sans-serif;
 }
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.flexer {
-    display: flex;
-}
 .action-button {
     color: white;
     background-color: #1d2226;
     flex-direction: column;
     align-items: center;
-    border: 0;
-    box-shadow: none;
-    font-size: 1.4em;
+    padding: 0.5em;
 }
 .frame {
     border: 1px solid black;
@@ -64,4 +113,13 @@ canvas {
     background-color: rgba(255, 255, 255, 0.4);
     width: 100%;
     height: 100%;
+    cursor: crosshair;
+}
+.layover-banner {
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.4em;
+    width: max-content;
+    color: white;
+    border-radius: 5px;
 }

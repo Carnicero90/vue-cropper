@@ -12,86 +12,112 @@
 </head>
 
 <body>
+    <!-- div#root -->
     <div id="root">
-        <main>
-            <h1>PROFILER</h1>
+        <!-- header -->
+        <header class="d-flex col center-cross mb-3">
+            <h1 class="h1 mb-1">PROFILER</h1>
             <p>Cliccate sulla foto per spostarla all'interno della cornice, usate l'input range per ridimensionarla</p>
+        </header>
+        <!-- END header -->
+
+        <main class="d-flex col center-cross">
+
             <!-- div.pic-container -->
             <div class="pic-container" @click="disselect">
                 <div class="frame rel" style="height: 400px; width: 400px;">
                     <img v-if="!preload" src="img/default-user.png" alt="">
                     <img v-else :src="preload" alt="" id="image" class="abs" :style="`width: ${pic_width*size}%; filter: sepia(${sepia}) grayscale(${grayscale}); height:auto; left: ${x}; 
                             top: ${y};`" @mousedown.left="selectPic" @dragstart="movePic(event)">
-
-                    <div class="layover abs" v-if="isPicSelected" @mousemove="move(event)" @mouseup.left="disselect"
-                        style="cursor:crosshair" @mouseleave="disselect">
-                        <p
-                            style="user-select: none; position: relative; top:50%; left: 20%; transform: translate(0,-50%); background-color: rgba(0,0,0,0.5); padding: .4em; width: max-content; color: white; border-radius: 5px">
-                            Trascina l'immagine per riposizionarla</p>
+                    <!-- div.layover -->
+                    <div class="layover abs d-flex col center center-cross" v-if="isPicSelected" @mousemove="move(event)" @mouseup.left="disselect"
+                        @mouseleave="disselect">
+                        <p class="layover-banner">
+                            Trascina l'immagine per riposizionarla
+                        </p>
                     </div>
+                    <!-- END div.layover -->
                 </div>
             </div>
             <!-- END div.pic-container -->
 
-                <!-- div.actions -->
-                <div class="actions" v-if="!editing">
-                    <!-- button upload -->
-                    <button>
-                        <label for="upload" class="action-button flexer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
-                                fill="white" width="24" height="24" focusable="false">
-                                <path
-                                    d="M16 13a4 4 0 11-4-4 4 4 0 014 4zm6-4v11H2V9a3 3 0 013-3h1.3l1.2-3h9l1.2 3H19a3 3 0 013 3zm-5 4a5 5 0 10-5 5 5 5 0 005-5z">
-                                </path>
-                            </svg>
-                            Carica immagine</label>
-                        <input type="file" accept="image/*" name="upload" id="upload" class="hidden"
-                            v-on:change="preloadPic($event)">
-                    </button>
-                    <!-- END button upload -->
+            <!-- div.actions -->
+            <div class="actions" v-if="!editing">
+                <!-- button upload -->
+                <button>
+                    <label for="upload" class="action-button d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                            fill="white" width="24" height="24" focusable="false">
+                            <path
+                                d="M16 13a4 4 0 11-4-4 4 4 0 014 4zm6-4v11H2V9a3 3 0 013-3h1.3l1.2-3h9l1.2 3H19a3 3 0 013 3zm-5 4a5 5 0 10-5 5 5 5 0 005-5z">
+                            </path>
+                        </svg>
+                        Carica immagine</label>
+                    <input type="file" accept="image/*" name="upload" id="upload" class="d-none"
+                        v-on:change="preloadPic($event)">
+                </button>
+                <!-- END button upload -->
 
-                    <!-- button edit -->
-                    <button @click="editing = true">
-                        <div class="action-button flexer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
-                                fill="white" width="24" height="24" focusable="false">
-                                <path
-                                    d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z">
-                                </path>
-                            </svg>
-                            <span>Modifica</span>
-                        </div>
-                    </button>
-                    <!-- END button edit -->
+                <!-- button edit -->
+                <button @click="editing = true" v-if="preload">
+                    <div class="action-button d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                            fill="white" width="24" height="24" focusable="false">
+                            <path
+                                d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z">
+                            </path>
+                        </svg>
+                        <span>Modifica</span>
+                    </div>
+                </button>
+                <!-- END button edit -->
 
-                </div>
-                <!-- END div.actions -->
-                <div class="tools" v-if="editing">
-                    <h2>Ridimensionamento escluso, il resto fondamentalmente non funziona su Safari</h2>
+            </div>
+            <!-- END div.actions -->
+            <div class="tools" v-if="editing">
+                <div class="warning mb-2">
+                    <h2 class="h2">Ridimensionamento escluso, il resto fondamentalmente non funziona su Safari</h2>
                     <p>(e manco su IE, ma se lo usate affari vostri)</p>
-                    <ul>
-                        <li>
-                            <label for="size">Regola dimensioni foto</label>
-                            <input type="range" name="size" id="size" min="1" max="2" step="0.1" :value="size"
-                                v-model="size">
-                        </li>
-                        <li>
-                            <label for="grayscale">Scala di grigi</label>
-                            <input type="range" name="grayscale" id="grayscale" min="0" max="1" step="0.1"
-                                :value="grayscale" v-model="grayscale">
-                        </li>
-                        <li>
-
-
-                            <label for="sepia">Sepia</label>
-                            <input type="range" name="sepia" id="sepia" min="0" max="1" step="0.1" :value="sepia"
-                                v-model="sepia">
-                        </li>
-                    </ul>
-
-
-
                 </div>
+
+                <ul class="d-flex">
+                    <li>
+                        <label for="size">Regola dimensioni foto</label>
+                        <input type="range" name="size" id="size" min="1" max="2" step="0.1" :value="size"
+                            v-model="size">
+                    </li>
+                    <li>
+                        <label for="grayscale">Scala di grigi</label>
+                        <input type="range" name="grayscale" id="grayscale" min="0" max="1" step="0.1"
+                            :value="grayscale" v-model="grayscale">
+                    </li>
+                    <li>
+
+
+                        <label for="sepia">Sepia</label>
+                        <input type="range" name="sepia" id="sepia" min="0" max="1" step="0.1" :value="sepia"
+                            v-model="sepia">
+                    </li>
+                    <li @click="editing = false">
+                        <button data-test-modal-close-btn="" aria-label="Chiudi">
+                            <li-icon aria-hidden="true" type="cancel-icon" class="artdeco-button__icon"><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
+                                    fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
+                                    <path
+                                        d="M13.42 12L20 18.58 18.58 20 12 13.42 5.42 20 4 18.58 10.58 12 4 5.42 5.42 4 12 10.58 18.58 4 20 5.42z">
+                                    </path>
+                                </svg></li-icon>
+
+                            <span class="artdeco-button__text">
+
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+
+
+
+            </div>
 
             <div>
                 <button @click="savePic">Salva immagine</button>
@@ -99,15 +125,17 @@
 
             <div class="output">
                 <h2>Stampiamo immagine croppata, tanto per testare</h2>
-                <p>Il risultato risulta spesso diverso da foto sopra per ragioni non particolarmente a me chiare, comunque pare che i filtri per le canvas siano funzione sperimentale</p>
-                    <canvas id="croppedImage" width="400px" height="400px">
-                    </canvas>
+                <p>Il risultato risulta spesso diverso da foto sopra per ragioni non particolarmente a me chiare,
+                    comunque pare che i filtri per le canvas siano funzione sperimentale</p>
+                <canvas id="croppedImage" width="400" height="400" style="height: 400px; width: 400px;">
+                </canvas>
 
             </div>
 
 
         </main>
     </div>
+    <!-- END div#root -->
     <script src="js/app.js"></script>
 
 </body>
