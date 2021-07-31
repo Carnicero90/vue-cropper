@@ -27,11 +27,11 @@
             <div class="pic-container" @click="disselect">
                 <div class="frame rel" style="height: 400px; width: 400px;">
                     <img v-if="!preload" src="img/default-user.png" alt="">
-                    <img v-else :src="preload" alt="" id="image" class="abs" :style="`width: ${pic_width*size}%; filter: sepia(${sepia}) grayscale(${grayscale}); height:auto; left: ${x}; 
+                    <img v-else :src="preload" alt="" id="image" class="abs" :style="`width: ${pic_width*size}%; filter: sepia(${sepia}%) grayscale(${grayscale}%); height:auto; left: ${x}; 
                             top: ${y};`" @mousedown.left="selectPic" @dragstart="movePic(event)">
                     <!-- div.layover -->
-                    <div class="layover abs d-flex col center center-cross" v-if="isPicSelected" @mousemove="move(event)" @mouseup.left="disselect"
-                        @mouseleave="disselect">
+                    <div class="layover abs d-flex col center center-cross" v-if="isPicSelected"
+                        @mousemove="move(event)" @mouseup.left="disselect" @mouseleave="disselect">
                         <p class="layover-banner">
                             Trascina l'immagine per riposizionarla
                         </p>
@@ -87,15 +87,16 @@
                             v-model="size">
                     </li>
                     <li>
+                        <!-- in % da 0 a 100, che poi quello usa la proprieta' filter delle canvas -->
                         <label for="grayscale">Scala di grigi</label>
-                        <input type="range" name="grayscale" id="grayscale" min="0" max="1" step="0.1"
+                        <input type="range" name="grayscale" id="grayscale" min="1" max="100" step="1"
                             :value="grayscale" v-model="grayscale">
                     </li>
                     <li>
 
-
+                        <!--  Anche qui: in % da 0 a 100, che poi quello usa la proprieta' filter delle canvas -->
                         <label for="sepia">Sepia</label>
-                        <input type="range" name="sepia" id="sepia" min="0" max="1" step="0.1" :value="sepia"
+                        <input type="range" name="sepia" id="sepia" min="1" max="100" step="1" :value="sepia"
                             v-model="sepia">
                     </li>
                     <li @click="editing = false">

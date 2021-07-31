@@ -11,6 +11,7 @@ var app = new Vue({
         pic: null,
         pic_width: 0,
         frame: null,
+        // filters
         grayscale: 0,
         sepia: 0,
         canvas: '',
@@ -100,7 +101,11 @@ var app = new Vue({
                 // this.canvas.style.width = w*10+'px';
                 // this.canvas.style.height = h*10+'px';
 
-                this.context.filter = `grayscale(${this.grayscale}) sepia(${this.sepia})`;
+                /* https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter
+                    documentato qua, si tratta di una funzione sperimentale non molto compatibile coi vari browser
+                */
+
+                this.context.filter = `sepia(${this.sepia}%) grayscale(${this.grayscale}%)`;
                 this.context.drawImage(this.newImg, x,y,w,h);
             }
 
