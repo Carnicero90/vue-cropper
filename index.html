@@ -20,7 +20,7 @@
         <!-- header -->
         <header class="d-flex col center-cross mb-3">
             <h1 class="h1 mb-1 c-2">CROPPER</h1>
-            <p class="text-center">Strumento per croppare le immagine, filtrarle, e salvarle in una canvas. <br>
+            <p class="text-center bg-c-1">Strumento per croppare le immagine, filtrarle, e salvarle in una canvas. <br>
             Funziona male su Safari, che non supporta i filtri sulle canvas.</p>
         </header>
         <!-- END header -->
@@ -28,7 +28,7 @@
         <main class="d-flex col center-cross">
 
             <!-- div.pic-container -->
-            <div class="pic-container" @click="disselect">
+            <div class="pic-container mb-1" @click="disselect">
                 <div class="frame rel" style="height: 400px; width: 400px;">
                     <img v-if="!preload" src="img/default-user.png" alt="">
                     <img v-else :src="preload" alt="" id="image" class="abs" :style="`width: ${pic_width*size}%; filter: sepia(${sepia}%) grayscale(${grayscale}%); height:auto; left: ${x}; 
@@ -46,7 +46,7 @@
             <!-- END div.pic-container -->
 
             <!-- div.actions -->
-            <div class="actions" v-if="!editing">
+            <div class="actions mb-3" v-if="!editing">
                 <!-- button upload -->
                 <button>
                     <label for="upload" class="action-button d-flex">
@@ -79,10 +79,6 @@
             </div>
             <!-- END div.actions -->
             <div class="tools mb-3" v-if="editing">
-                <div class="warning mb-2">
-                    <h2 class="h2">Ridimensionamento escluso, il resto fondamentalmente non funziona su Safari</h2>
-                    <p>(e manco su IE, ma se lo usate affari vostri)</p>
-                </div>
 
                 <ul class="d-flex">
                     <li class="d-flex col tool rel">
@@ -116,12 +112,12 @@
 
             </div>
 
-            <div>
-                <button @click="savePic">Salva immagine</button>
+            <div class="mb-3">
+                <button @click="savePic" class="big-btn bg-c-2 c-1">Salva immagine</button>
             </div>
 
             <div class="output">
-                <h2 class="h2">Stampiamo immagine croppata, tanto per testare</h2>
+                <h2 class="h2 mb-2">Stampiamo immagine croppata, tanto per testare</h2>
                 <canvas id="croppedImage" class="round" width="400" height="400" style="height: 400px; width: 400px;">
                 </canvas>
 

@@ -61,6 +61,13 @@ li {
 .c-2 {
    color: #17b473;
 }
+
+.bg-c-1 {
+    background-color: #4d5b67;
+}
+.bg-c-2 {
+    background-color: #17b473;
+}
 /* ==========
     POSITIONING
    ========== */
@@ -115,6 +122,11 @@ body {
     padding: 0.5em;
     border-radius: 10px;
 }
+.big-btn {
+    padding: .5em;
+    font-weight: bold;
+    font-size: 1.1em;
+}
 .frame {
     border: 1px solid black;
     overflow: hidden;
@@ -145,7 +157,10 @@ canvas {
     color: white;
     border-radius: 5px;
 }
-
+.tools {
+    background-color: #4d5b67;
+    padding: .5em;
+}
 .tool {
     display: block;
     margin-right: 2em;
