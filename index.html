@@ -85,7 +85,8 @@
                         <span class="tool-tot abs">{{ size }}</span>
                         <label for="size" class="d-block mb-2">Zoom</label>
                         <input type="range" name="size" id="size" class="tools-range" min="1" max="2" step="0.1"
-                            :value="size" v-model="size">
+                            :value="size" v-model="size"
+                            @mouseup.left="readjust">
                     </li>
                     <li class="d-flex col tool rel">
                         <!-- in % da 0 a 100, che poi quello usa la proprieta' filter delle canvas -->
@@ -101,7 +102,7 @@
                         <input type="range" name="sepia" id="sepia" class="tools-range" min="0" max="100" step="1"
                             :value="sepia" v-model="sepia">
                     </li>
-                    <li @click="editing = false">
+                    <li @click="editing = false" class="ml-auto">
                         <button aria-label="Chiudi">
                             <i class="fas fa-times"></i>
                         </button>
