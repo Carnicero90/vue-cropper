@@ -15,6 +15,12 @@ li {
     position: absolute;
 }
 
+body {
+    background-color: #1d2226;
+    color: white;
+    font-family: sans-serif;
+}
+
 .flexer {
     display: flex;
 }
@@ -22,6 +28,10 @@ li {
     position: relative;
     border: 1px solid black;
     overflow: hidden;
+    border-radius: 50%;
+}
+
+#image {
 }
 .layover {
     top: 0;

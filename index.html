@@ -14,9 +14,7 @@
 <body>
     <div id="root">
         <main>
-            <h1>Test su futuro vue component per il resizing + posizionamento di una foto</h1>
-            <p style=" margin-top: 20vh;">Per ora funzia solo se si rimane entro la cornice, quindi a lv di esperienza
-                utente non e' una manna.</p>
+            <h1>PROFILER</h1>
             <p>Cliccate sulla foto per spostarla all'interno della cornice, usate l'input range per ridimensionarla</p>
             <div class="flexer">
                 <div class="pic-container" @click="disselect">
@@ -25,7 +23,7 @@
                         <img v-else :src="preload" alt="" id="image" class="abs" :style="`width: ${pic_width*size}%; filter: sepia(${sepia}) grayscale(${grayscale}); height:auto; left: ${x}; 
                             top: ${y};`" @mousedown.left="selectPic" @dragstart="movePic(event)">
 
-                        <div class="layover abs" v-if="isPicSelected" @mousemove="move(event)" @mouseup.left="disselect"
+                        <div class="layover abs" v-if="isPicSelected" @mousemove="move(event)" @mouseup.left="disselect" style="cursor:crosshair"
                             @mouseleave="disselect">
                             <p
                                 style="user-select: none; position: relative; top:50%; left: 20%; transform: translate(0,-50%); background-color: rgba(0,0,0,0.5); padding: .4em; width: max-content; color: white; border-radius: 5px">
@@ -72,6 +70,7 @@
             <canvas id="croppedImage" width="398px" height="398px">
 
             </canvas>
+            <img :src="canvas.toDataURL" alt="">
 
         </main>
     </div>

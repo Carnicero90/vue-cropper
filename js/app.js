@@ -12,7 +12,8 @@ var app = new Vue({
         pic_width: 0,
         frame: null,
         grayscale: 0,
-        sepia: 0
+        sepia: 0,
+        canvas: ''
     },
     methods: {
         preloadPic(event) {
