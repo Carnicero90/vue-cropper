@@ -11,8 +11,14 @@ img {
 li {
     padding-top: 20px;
 }
+.hidden {
+    display: none;
+}
 .abs {
     position: absolute;
+}
+.rel {
+    position: relative;
 }
 
 body {
@@ -20,18 +26,32 @@ body {
     color: white;
     font-family: sans-serif;
 }
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .flexer {
     display: flex;
 }
+.action-button {
+    color: white;
+    background-color: #1d2226;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
+    box-shadow: none;
+    font-size: 1.4em;
+}
 .frame {
-    position: relative;
     border: 1px solid black;
     overflow: hidden;
     border-radius: 50%;
 }
 
-#image {
+canvas {
+    border: 1px solid white;
 }
 .layover {
     top: 0;

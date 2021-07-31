@@ -13,7 +13,9 @@ var app = new Vue({
         frame: null,
         grayscale: 0,
         sepia: 0,
-        canvas: ''
+        canvas: '',
+        canvasURL: '',
+        editing: false,
     },
     methods: {
         preloadPic(event) {
@@ -23,7 +25,6 @@ var app = new Vue({
             const f = event.target.files[0];
 
             this.preload = URL.createObjectURL(f);
-            console.log(this.preload)
             const im = new Image();
             im.src = this.preload;
             im.onload = () => {
@@ -98,6 +99,23 @@ var app = new Vue({
                 this.context.filter = `grayscale(${this.grayscale}) sepia(${this.sepia})`;
                 this.context.drawImage(this.newImg, x,y,w,h);
             }
+
+            // testing 
+            // document.querySelector('#croppedImage').toBlob((blob)=> {
+            //     var newImg = document.createElement('img'),
+            //      url = URL.createObjectURL(blob);
+            //     this.preload = url;
+
+            //     newImg.onload = function() {
+            //         URL.revokeObjectURL(url);
+            //     };
+            // })
+            // let sr = new Image();
+            // a = this.canvas.toDataURL("image/jpeg")
+            // console.log(a)
+            // this.pic.src = a;
+
+            // this.pic.src = this.canvas.toDataURL();
         }
     },
     mounted() {
