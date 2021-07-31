@@ -20,6 +20,9 @@ li {
 .rel {
     position: relative;
 }
+.m-auto {
+    margin: auto;
+}
 
 body {
     background-color: #1d2226;
@@ -52,6 +55,8 @@ main {
 
 canvas {
     border: 1px solid white;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 .layover {
     top: 0;
