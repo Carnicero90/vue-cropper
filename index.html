@@ -8,6 +8,9 @@
 
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <!-- Custom script -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -16,8 +19,9 @@
     <div id="root">
         <!-- header -->
         <header class="d-flex col center-cross mb-3">
-            <h1 class="h1 mb-1">PROFILER</h1>
-            <p>Cliccate sulla foto per spostarla all'interno della cornice, usate l'input range per ridimensionarla</p>
+            <h1 class="h1 mb-1 c-2">CROPPER</h1>
+            <p class="text-center">Strumento per croppare le immagine, filtrarle, e salvarle in una canvas. <br>
+            Funziona male su Safari, che non supporta i filtri sulle canvas.</p>
         </header>
         <!-- END header -->
 
@@ -74,44 +78,36 @@
 
             </div>
             <!-- END div.actions -->
-            <div class="tools" v-if="editing">
+            <div class="tools mb-3" v-if="editing">
                 <div class="warning mb-2">
                     <h2 class="h2">Ridimensionamento escluso, il resto fondamentalmente non funziona su Safari</h2>
                     <p>(e manco su IE, ma se lo usate affari vostri)</p>
                 </div>
 
                 <ul class="d-flex">
-                    <li>
-                        <label for="size">Regola dimensioni foto</label>
-                        <input type="range" name="size" id="size" min="1" max="2" step="0.1" :value="size"
-                            v-model="size">
+                    <li class="d-flex col tool rel">
+                        <span class="tool-tot abs">{{ size }}</span>
+                        <label for="size" class="d-block mb-2">Zoom</label>
+                        <input type="range" name="size" id="size" class="tools-range" min="1" max="2" step="0.1"
+                            :value="size" v-model="size">
                     </li>
-                    <li>
+                    <li class="d-flex col tool rel">
                         <!-- in % da 0 a 100, che poi quello usa la proprieta' filter delle canvas -->
-                        <label for="grayscale">Scala di grigi</label>
-                        <input type="range" name="grayscale" id="grayscale" min="1" max="100" step="1"
-                            :value="grayscale" v-model="grayscale">
+                        <span class="tool-tot abs">{{ grayscale }}</span>
+                        <label for="grayscale" class="d-block mb-2">Scala di grigi</label>
+                        <input type="range" name="grayscale" id="grayscale" class="tools-range" min="0" max="100"
+                            step="1" :value="grayscale" v-model="grayscale">
                     </li>
-                    <li>
-
+                    <li class="d-flex col tool rel">
                         <!--  Anche qui: in % da 0 a 100, che poi quello usa la proprieta' filter delle canvas -->
-                        <label for="sepia">Sepia</label>
-                        <input type="range" name="sepia" id="sepia" min="1" max="100" step="1" :value="sepia"
-                            v-model="sepia">
+                        <span class="tool-tot abs">{{ sepia }}</span>
+                        <label for="sepia" class="d-block mb-2">Sepia</label>
+                        <input type="range" name="sepia" id="sepia" class="tools-range" min="0" max="100" step="1"
+                            :value="sepia" v-model="sepia">
                     </li>
                     <li @click="editing = false">
-                        <button data-test-modal-close-btn="" aria-label="Chiudi">
-                            <li-icon aria-hidden="true" type="cancel-icon" class="artdeco-button__icon"><svg
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24"
-                                    fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
-                                    <path
-                                        d="M13.42 12L20 18.58 18.58 20 12 13.42 5.42 20 4 18.58 10.58 12 4 5.42 5.42 4 12 10.58 18.58 4 20 5.42z">
-                                    </path>
-                                </svg></li-icon>
-
-                            <span class="artdeco-button__text">
-
-                            </span>
+                        <button aria-label="Chiudi">
+                            <i class="fas fa-times"></i>
                         </button>
                     </li>
                 </ul>
@@ -125,16 +121,17 @@
             </div>
 
             <div class="output">
-                <h2>Stampiamo immagine croppata, tanto per testare</h2>
-                <p>Il risultato risulta spesso diverso da foto sopra per ragioni non particolarmente a me chiare,
-                    comunque pare che i filtri per le canvas siano funzione sperimentale</p>
-                <canvas id="croppedImage" width="400" height="400" style="height: 400px; width: 400px;">
+                <h2 class="h2">Stampiamo immagine croppata, tanto per testare</h2>
+                <canvas id="croppedImage" class="round" width="400" height="400" style="height: 400px; width: 400px;">
                 </canvas>
 
             </div>
 
 
         </main>
+        <div class="created fix">Created with <i class="fas fa-heart"></i> for Nobody</div>
+
+
     </div>
     <!-- END div#root -->
     <script src="js/app.js"></script>
