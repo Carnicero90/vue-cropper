@@ -113,6 +113,16 @@
                     </li>
                     <!-- END range sepia -->
 
+                    <!-- button undo -->
+                    <li>
+                        <button class="d-flex col" @click="undo">
+                            <span>Undo</span>
+
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </li>
+                    <!-- END button undo -->
+
                     <!-- button exit -->
                     <li @click="editing = false" class="ml-auto">
                         <button aria-label="Chiudi">
@@ -151,4 +161,5 @@
     <!-- local js script -->
     <script src="js/app.js"></script>
 </body>
+
 </html>

@@ -100,6 +100,13 @@ var app = new Vue({
             }
 
         },
+
+        undo() {
+            // resetta i filtri e le dimensioni allo stato iniziale
+            this.size = 1;
+            this.sepia = 0;
+            this.grayscale = 0;
+        },
         savePic() {
             this.context = this.canvas.getContext('2d');
 
