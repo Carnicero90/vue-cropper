@@ -14,12 +14,17 @@ var app = new Vue({
         // filters
         grayscale: 0,
         sepia: 0,
+
         canvas: '',
         canvasURL: '',
         editing: false,
     },
     methods: {
         preloadPic(event) {
+            /*
+            all'evento change sull'input file, usa l'immagine caricata dall'utente come src di #image,
+            ridimensionandola a seconda del rapporto di forma dell'immagine originale.
+            */
 
             this.size = 1;
 
@@ -41,6 +46,7 @@ var app = new Vue({
             }
 
             setTimeout(() => {
+                // necessario anche un settimeout (o un nexttick), se non differisco non mi trova l'immagine
                 this.pic = document.querySelector('#image');
                 this.x = 0;
                 this.y = 0;
@@ -48,6 +54,10 @@ var app = new Vue({
         },
 
         selectPic(event) {
+            /*
+            se è stata caricata l'immagine, all'evento click si "segna" che l'immagine è stata selezionata
+            e le coordinate dell'evento
+            */
             if (this.pic) {
                 this.isPicSelected = true;
                 this.clickX = event.clientX - this.x;
@@ -56,9 +66,11 @@ var app = new Vue({
 
         },
         movePic(event) {
+            // previene il drag dell'immagine
             event.preventDefault();
         },
         move(event) {
+            // se l'immagine è selezionata, la fa spostare seguendo il cursore
             if (this.isPicSelected) {
                 this.x = event.clientX - this.clickX;
                 this.y = event.clientY - this.clickY;

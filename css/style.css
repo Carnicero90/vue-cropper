@@ -116,15 +116,12 @@ li {
 
 body {
     background-color: #1d2226;
-    color: white;
     font-family: sans-serif;
 }
 
 .action-button {
     color: white;
     background-color: #1d2226;
-    flex-direction: column;
-    align-items: center;
     padding: 0.5em;
     border-radius: 10px;
 }
@@ -190,6 +187,8 @@ canvas {
  .fa-heart {
     color: red;
  }
+
+ /* TODO: risistema sta roba */
 input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
     width: 100%; /* Specific width is required for Firefox. */
